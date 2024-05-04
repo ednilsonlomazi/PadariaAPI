@@ -1,9 +1,12 @@
+using Microsoft.EntityFrameworkCore;
 using WebAPI.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("PadariaDbCs");
 // Add services to the container.
-builder.Services.AddSingleton<PadariaDbContext>();
+//builder.Services.AddDbContext<PadariaDbContext>(o => o.UseInMemoryDatabase("PadariaDb"));
+builder.Services.AddDbContext<PadariaDbContext>(o => o.UseSqlServer(connectionString));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

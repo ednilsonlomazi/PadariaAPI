@@ -5,7 +5,7 @@ using WebAPI.Persistence;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/ola-mundo")]
+    [Route("api/padaria")]
     [ApiController]
     public class PadariaController : ControllerBase
     {
@@ -38,6 +38,7 @@ namespace WebAPI.Controllers
         public IActionResult Post(TabProduto tabProduto)
         {
             padariaDbContext.tabProdutos.Add(tabProduto);
+            padariaDbContext.SaveChanges();
 
             return CreatedAtAction(nameof(GetById), new { id = tabProduto.Id }, tabProduto);
         }  
@@ -49,6 +50,8 @@ namespace WebAPI.Controllers
             if(tabProduto != null)
             {
                 tabProduto.Update(tabProdutoInput.DesProduto);
+                padariaDbContext.tabProdutos.Update(tabProdutoInput);
+                padariaDbContext.SaveChanges();
                 return Ok(tabProduto);
             }
             return NotFound();
@@ -61,6 +64,7 @@ namespace WebAPI.Controllers
             if(tabProduto != null)
             {
                 tabProduto.Delete();
+                padariaDbContext.SaveChanges();
                 return Ok();
             }
             return NotFound();
