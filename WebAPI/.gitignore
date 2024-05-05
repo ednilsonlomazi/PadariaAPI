@@ -1,2 +1,3 @@
 WebApi/bin
-WebApi/obj/Debug
+WebApi/obj
+WebApi/Persistence/Migrations

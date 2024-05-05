@@ -2,19 +2,19 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Entity {
-    public class TabFamilia
+    public class TabLogin
     {
         
         public int Id {get; set;}
-        public string DesFamilia {get; set;}
-        public bool IndAtivo {get;set;}
-        public List<TabProduto> Produtos {get;set;}
-
-        public TabFamilia()
+        public string Username {get; set;}
+        public string Password {get; set;}
+        public int IdPessoa {get; set;}
+        public bool IndAtivo {get;set;}       
+        public TabLogin()
         {
             this.IndAtivo = true;
-            this.Produtos = new List<TabProduto>();
-            this.DesFamilia = "";
+            this.Username = "";
+            this.Password = "";
         }
 
         public void Delete()

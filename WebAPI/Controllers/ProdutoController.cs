@@ -5,7 +5,7 @@ using WebAPI.Persistence;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/padaria")]
+    [Route("api/padaria/produto")]
     [ApiController]
     public class PadariaController : ControllerBase
     {
@@ -20,13 +20,13 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IActionResult GetAll ()
         {
-            return Ok(padariaDbContext.tabProdutos);
+            return Ok(padariaDbContext.TabProdutos);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(Guid id)
+        public IActionResult GetById(int id)
         {
-            var tabProduto = padariaDbContext.tabProdutos.SingleOrDefault(d => d.Id == id);
+            var tabProduto = padariaDbContext.TabProdutos.SingleOrDefault(d => d.Id == id);
             if(tabProduto != null)
             {
                 return Ok(tabProduto);
@@ -37,20 +37,21 @@ namespace WebAPI.Controllers
         [HttpPost]
         public IActionResult Post(TabProduto tabProduto)
         {
-            padariaDbContext.tabProdutos.Add(tabProduto);
+            padariaDbContext.TabProdutos.Add(tabProduto);
+             
             padariaDbContext.SaveChanges();
 
             return CreatedAtAction(nameof(GetById), new { id = tabProduto.Id }, tabProduto);
         }  
 
         [HttpPut("{id}")]
-        public IActionResult Put(Guid id, TabProduto tabProdutoInput)
+        public IActionResult Put(int id, TabProduto tabProdutoInput)
         {
-            var tabProduto = padariaDbContext.tabProdutos.SingleOrDefault(d => d.Id == id);
+            var tabProduto = padariaDbContext.TabProdutos.SingleOrDefault(d => d.Id == id);
             if(tabProduto != null)
             {
-                tabProduto.Update(tabProdutoInput.DesProduto);
-                padariaDbContext.tabProdutos.Update(tabProdutoInput);
+                
+                padariaDbContext.TabProdutos.Update(tabProdutoInput);
                 padariaDbContext.SaveChanges();
                 return Ok(tabProduto);
             }
@@ -58,9 +59,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
+        public IActionResult Delete(int id)
         {
-            var tabProduto = padariaDbContext.tabProdutos.SingleOrDefault(d => d.Id == id);
+            var tabProduto = padariaDbContext.TabProdutos.SingleOrDefault(d => d.Id == id);
             if(tabProduto != null)
             {
                 tabProduto.Delete();

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Persistence;
 
@@ -10,9 +11,11 @@ using WebAPI.Persistence;
 namespace WebAPI.Persistence.Migrations
 {
     [DbContext(typeof(PadariaDbContext))]
-    partial class PadariaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240505134328_m4")]
+    partial class m4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

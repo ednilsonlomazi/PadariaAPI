@@ -1,46 +1,46 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace WebAPI.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class m1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "TabFamilia",
+                name: "tabFamilia",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     DesFamilia = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IndAtivo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TabFamilia", x => x.Id);
+                    table.PrimaryKey("PK_tabFamilia", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "tabProdutos",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     des_produto = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: false),
                     IndAtivo = table.Column<bool>(type: "bit", nullable: false),
-                    Familia = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    tabFamiliaId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    tabFamiliaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tabProdutos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_tabProdutos_TabFamilia_tabFamiliaId",
+                        name: "FK_tabProdutos_tabFamilia_tabFamiliaId",
                         column: x => x.tabFamiliaId,
-                        principalTable: "TabFamilia",
+                        principalTable: "tabFamilia",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -58,7 +58,7 @@ namespace WebAPI.Persistence.Migrations
                 name: "tabProdutos");
 
             migrationBuilder.DropTable(
-                name: "TabFamilia");
+                name: "tabFamilia");
         }
     }
 }
